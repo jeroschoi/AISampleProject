@@ -22,10 +22,11 @@ public class LocalOllamaTestService {
             Map<String, Object> body = Map.of(
                     "model", model,
                     "messages", List.of(
-                            Map.of("role", "user", "content", "you are teacher now you check the exams data~"),
-                            Map.of("role", "user", "content", "Here is good example.\n```json\n" + "Heungseon Daewongun, who governed for approximately ten years after King Gojong's ascension to the throne in 1863, pursued various reform policies aimed at strengthening royal authority and stabilizing the people's livelihood." + "\n```\n"),
-                            Map.of("role" , "user" , "content" ,"the exams data : i down know ~ history"),
-                            Map.of("role", "user", "content", "Your output must follow this format:{\"score\": $NUMBER, \"reason\": \"$TEXT\"}\n")
+                            Map.of("role", "user", "content", "you are teacher now you check the history exams"),
+                            Map.of("role", "user", "content", "Your output must follow this format:{\"score\": $NUMBER, \"reason\": \"$TEXT\"}\n"),
+                            Map.of("role", "user", "content", "Here is good example - " + "\n```\n" + "Heungseon Daewongun, who governed for approximately ten years after King Gojong's ascension to the throne in 1863, pursued various reform policies aimed at strengthening royal authority and stabilizing the people's livelihood." + "\n```\n"),
+                            Map.of("role" , "user" , "content" ,"you are check this data -" + "\n```\n" +"i down know ~ history" + "\n```\n")
+
                     ),
                     "stream", false,
                     "options", Map.of("temperature", temperature)
