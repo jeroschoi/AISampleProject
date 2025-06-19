@@ -2,7 +2,10 @@ package com.event.mcpsampleproject.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.ai.ollama.OllamaChatModel;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -11,16 +14,20 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.List;
 import java.util.Map;
 
+@RequiredArgsConstructor
 @Service
 @Slf4j
 public class LocalOllamaTestService {
+
     private final WebClient webClient = WebClient.create("http://localhost:11434");
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private final OllamaChatModel chatModel;
 
-    public void evaluate(String model , Long temperature) {
+
+    public void ollamaLocalTest(String model , Long temperature) {
         try {
             Map<String, Object> body = Map.of(
-                    "model", model,
+                    "model", "mistral",
                     "messages", List.of(
                             Map.of("role", "user", "content", "you are teacher now you check the history exams"),
                             Map.of("role", "user", "content", "Your output must follow this format:{\"score\": $NUMBER, \"reason\": \"$TEXT\"}\n"),
@@ -49,5 +56,11 @@ public class LocalOllamaTestService {
         } catch (Exception e) {
             log.error("Evaluation failed", e);
         }
+    }
+
+    public void ollamaSpringTest() {
+        log.info("start ollamaSpringTest");
+        String response = chatModel.call(new UserMessage("who are you?"));
+        log.info(response);
     }
 }

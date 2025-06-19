@@ -12,7 +12,12 @@ public class TestController {
     final private LocalOllamaTestService localOllamaTestService;
 
     @RequestMapping(value = "/test/ollama")
-    public void tsetLocalOllama(){
-        localOllamaTestService.evaluate("llama3.2" , 0L);
+    public void testLocalOllama(){
+        localOllamaTestService.ollamaLocalTest("llama3.2" , 0L);
+    }
+
+    @RequestMapping(value = "/test/spring/ollama")
+    public void testSpringAIOllama(){
+        localOllamaTestService.ollamaSpringTest();
     }
 }
